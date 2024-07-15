@@ -1,7 +1,9 @@
 import dotenv from "dotenv";
 import connectDB from "./db/index.js";
 // import { app } from "./app.js";
-
+dotenv.config({
+  path: "./.env",
+});
 // *****App data to remove error*****
 import express from "express";
 import cors from "cors";
@@ -16,8 +18,8 @@ app.use(
   })
 );
 
-app.use(express.json({ limit: "16kb" }));
-app.use(express.urlencoded({ extended: true, limit: "16kb" }));
+app.use(express.json({ limit: "50kb" }));
+app.use(express.urlencoded({ extended: true, limit: "50kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
@@ -27,10 +29,6 @@ import userRouter from "./routes/user.routes.js";
 // routes declaration
 app.use("/api/v1/users", userRouter);
 // *****app data end**********
-
-dotenv.config({
-  path: "./.env",
-});
 
 connectDB()
   .then(() => {
